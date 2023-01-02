@@ -14,18 +14,41 @@ body { margin: 0; padding: 0; }
 <body>
 <div id="map"></div>
 <script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoidGVldGoiLCJhIjoiY2xjZGppMjg2MTljbjNxb3dtbG5vcjRsaiJ9.-6Ml8veUpNWWkm_Nkqt0CQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoidGVldGoiLCJhIjoiY2xjZGppMjg2MTljbjNxb3dtbG5vcjRsaiJ9.-6Ml8veUpNWWkm_Nkqt0CQ';
 const map = new mapboxgl.Map({
 container: 'map', // container ID
 // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
 
 style: 'mapbox://styles/teetj/clcdjpzpm000d14lx0mxcc0nn',
 //	style: 'mapbox://styles/mapbox/streets-v12', // style URL
-center: [27.0, 56.8], // starting position [lng, lat]
+center: [27.0, 56.9], // starting position [lng, lat]
 pitch: 60, // pitch in degrees
 bearing: 0, // bearing in degrees
 zoom: 10
 });
+	
+map.on('load', () => {
+map.addSource('wms-test-source', {
+'type': 'raster',
+// use the tiles option to specify a WMS tile source URL
+// https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/
+'tiles': [
+'https://kaart.maaamet.ee/wms/alus?bbox={bbox-epsg-3301}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3301&transparent=true&width=256&height=256&layers=pohi_vv'
+//'https://img.nj.gov/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=Natural2015'
+],
+'tileSize': 256
+});
+map.addLayer(
+{
+'id': 'wms-test-layer',
+'type': 'raster',
+'source': 'wms-test-source',
+'paint': {}
+},
+'building' // Place layer under labels, roads and buildings.
+);
+});
+	
 </script>
  
 </body>
