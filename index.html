@@ -21,7 +21,7 @@ container: 'map', // container ID
 
 style: 'mapbox://styles/teetj/clcdjpzpm000d14lx0mxcc0nn',
 //	style: 'mapbox://styles/mapbox/streets-v12', // style URL
-center: [27.0, 57.4], // starting position [lng, lat]
+center: [27.0, 58.4], // starting position [lng, lat]
 pitch: 60, // pitch in degrees
 bearing: 0, // bearing in degrees
 zoom: 10,
@@ -30,29 +30,7 @@ language: 'et'
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
-	
-map.on('load', () => {
-map.addSource('wms-test-source', {
-'type': 'raster',
-// use the tiles option to specify a WMS tile source URL
-// https://docs.mapbox.com/mapbox-gl-js/style-spec/sources/
-'tiles': [
-'https://kaart.maaamet.ee/wms/alus?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=pohi_vv'
-//'https://img.nj.gov/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&transparent=true&width=256&height=256&layers=Natural2015'
-],
-'tileSize': 256
-});
-map.addLayer(
-{
-'id': 'wms-test-layer',
-'type': 'raster',
-'source': 'wms-test-source',
-'paint': {}
-},
-'building' // Place layer under labels, roads and buildings.
-);
-});
-	
+
 </script>
  
 </body>
