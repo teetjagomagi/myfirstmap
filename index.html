@@ -24,8 +24,12 @@ style: 'mapbox://styles/teetj/clcdjpzpm000d14lx0mxcc0nn',
 center: [27.0, 56.9], // starting position [lng, lat]
 pitch: 60, // pitch in degrees
 bearing: 0, // bearing in degrees
-zoom: 10
+zoom: 10,
+language: 'et'
 });
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
 	
 map.on('load', () => {
 map.addSource('wms-test-source', {
